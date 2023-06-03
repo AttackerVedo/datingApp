@@ -6,9 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+ <androidx.constraintlayout.widget.ConstraintLayout
+     android:layout_width="match_parent"
+     android:layout_height="60dp"
+     tools:ignore="MissingConstraints">
+  <Button
+      android:id="@+id/mainLogout"
+      android:layout_width="150dp"
+      android:layout_height="60dp"
+      android:gravity="center_vertical"
+      android:text="LOGOUT(로그아웃)"
+      android:paddingLeft="20dp"
+      android:textStyle="bold"
+      android:textColor="@color/black"
+      android:textSize="14sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:ignore="MissingConstraints" />
+
+ </androidx.constraintlayout.widget.ConstraintLayout>
+
  <com.yuyakaido.android.cardstackview.CardStackView
+     android:layout_marginTop="60dp"
      android:id="@+id/cardStackView"
      android:layout_width="match_parent"
      android:layout_height="match_parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

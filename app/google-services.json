@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "597064384308",
+    "project_id": "datingapp-af240",
+    "storage_bucket": "datingapp-af240.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597064384308:android:d143fea288736cb9b0af61",
+        "android_client_info": {
+          "package_name": "com.attackervedo.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597064384308-6j9oudk6sh0fok14m29spe01h43k2b95.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZzuyReJ13RCwWe7Bed8Y6NCJq0lOgv-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597064384308-6j9oudk6sh0fok14m29spe01h43k2b95.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

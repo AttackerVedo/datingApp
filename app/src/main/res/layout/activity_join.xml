@@ -67,7 +67,6 @@
                 android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
-
         <com.google.android.material.textfield.TextInputLayout
             android:textColorHint="#FF9999"
             android:layout_width="match_parent"
