@@ -28,11 +28,21 @@
             tools:ignore="MissingConstraints" />
 
         <Button
+            android:id="@+id/mainLikeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="매칭"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints" />
+        <Button
             android:id="@+id/mainLogout"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="LOGOUT(로그아웃)"
+            android:text="로그아웃"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"
