@@ -8,7 +8,6 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -16,16 +15,14 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.attackervedo.myapplication.auth.IntroActivity
 import com.attackervedo.myapplication.auth.UserData
-import com.attackervedo.myapplication.silder.CardStackAdapter
+import com.attackervedo.myapplication.Adapter.CardStackAdapter
 import com.attackervedo.myapplication.utils.FirebaseAuthUtils
 import com.attackervedo.myapplication.utils.FirebaseRef
-import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.CardStackView
@@ -58,9 +55,10 @@ class MainActivity : AppCompatActivity() {
                 if(direction == Direction.Right){
                     // drag for right
                     var otherUid :String = userList[userCount].uid.toString()
-                    userLikeOtherUser(uid, otherUid)
-                    createNotificationChannel()
-                    sendNotification()
+                    var userName = userList[userCount].nickname.toString()
+                    userLikeOtherUser(uid, otherUid,userName)
+//                    createNotificationChannel()
+//                    sendNotification(userName)
 
                 }
 
@@ -178,13 +176,13 @@ class MainActivity : AppCompatActivity() {
     // 유저의 좋아요를 표시하는부분
     // 데이터에서 값을 지정해야하는데, 어떤값을 저장할까...?
     // 나의 uid, 좋아요한 사람의 uid
-    fun userLikeOtherUser(myUid:String, otherUid : String){
+    fun userLikeOtherUser(myUid:String, otherUid : String,userName: String){
         FirebaseRef.userLikeRef.child(myUid).child(otherUid).setValue("true")
-        getOtherUserLikeList(otherUid)
+        getOtherUserLikeList(otherUid,userName)
     }
 
     //내가 좋아요한 사람이 누구를 좋아요 했는지 알 수 있음.
-    fun getOtherUserLikeList(otherUid: String){
+    fun getOtherUserLikeList(otherUid: String,userName: String){
         val postListener = object : ValueEventListener {
             @SuppressLint("SuspiciousIndentation")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -194,6 +192,8 @@ class MainActivity : AppCompatActivity() {
                 val likeUserKey = dataModel.key.toString()
                     if(likeUserKey.equals(uid)){
                         Toast.makeText(this@MainActivity, "매칭 완료", Toast.LENGTH_SHORT).show()
+                        createNotificationChannel()
+                        sendNotification(userName)
                     }
                 }
 
@@ -226,14 +226,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("MissingPermission")
-    private fun sendNotification(){
+    private fun sendNotification(userName: String){
         var builder = NotificationCompat.Builder(this, "Test_Channel")
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentTitle("매칭완료")
-            .setContentText("매칭이 완료되었습니다 저사람도 나를 좋아해요.")
+            .setContentText("매칭이 완료되었습니다 ${userName} 님도 나를 좋아해요.")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         with(NotificationManagerCompat.from(this)){
             notify(123,builder.build())
         }
     }
+
+    // 1. 앱에서 코드로 notification 띄우기
+    // 2. firebase console에서 모든앱 사용자에게 push 보내기
+    // 3. 특정사용자에게 메세지 보내기(firebase console에서)
+    // 4. firebase console 이 아니라, 앱에서 직접 다른 사람에게 푸시 메세지 보내기
+
 }

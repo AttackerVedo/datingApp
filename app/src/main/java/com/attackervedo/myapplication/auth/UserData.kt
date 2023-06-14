@@ -6,4 +6,5 @@ data class UserData (
     val age:String? = null,
     val gender:String? = null,
     val location:String? = null,
+    val token:String? = null
         )
