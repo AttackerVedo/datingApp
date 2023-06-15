@@ -18,6 +18,7 @@ import com.attackervedo.myapplication.auth.UserData
 import com.attackervedo.myapplication.Adapter.CardStackAdapter
 import com.attackervedo.myapplication.utils.FirebaseAuthUtils
 import com.attackervedo.myapplication.utils.FirebaseRef
+import com.attackervedo.myapplication.utils.MyInfo
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -135,7 +136,10 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var userData = dataSnapshot.getValue(UserData::class.java)
                 currentUserGender = userData?.gender.toString()
+
+                MyInfo.myNickname = userData?.nickname.toString()
                 getUserDataList(currentUserGender)
+
             }
             override fun onCancelled(databaseError: DatabaseError) {
             }
